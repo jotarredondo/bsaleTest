@@ -27,6 +27,6 @@ public class Product {
 	private String urlImage;
 	private Float price;
 	private Integer discount;
-	private Category category;
+	private Integer category;
 	
 }
