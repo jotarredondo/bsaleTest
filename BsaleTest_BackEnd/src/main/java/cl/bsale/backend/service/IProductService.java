@@ -1,16 +1,17 @@
 package cl.bsale.backend.service;
 
-import cl.bsale.backend.VO.ProductVO;
+import java.util.List;
+import cl.bsale.backend.model.Product;
 
 public interface IProductService {
 	
-	public ProductVO findAll();
+	public List<Product> findAll();
 	
-	public ProductVO findById(Integer id);
+	public Product findById(Integer id);
 	
-	public ProductVO findByCategory(Integer id);
+	public List<Product> findByCategory(Integer id);
 	
-	public ProductVO findByNombre(String name);
+	public List<Product> findByNombre(String name);
 		
 
 }

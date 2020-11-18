@@ -14,7 +14,7 @@ public class BsaleTestBackEndApplication {
 		AnnotationConfigApplicationContext acac = new AnnotationConfigApplicationContext(AppConfig.class);
 		IProductService producto = acac.getBean(IProductService.class);
 		
-		System.out.println(producto.findByNombre("red"));
+		System.out.println(producto.findByNombre("energ").size());
 	}
 
 }
