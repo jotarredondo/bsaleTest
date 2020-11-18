@@ -1,14 +1,12 @@
 package cl.bsale.backend.service;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import cl.bsale.backend.VO.ProductVO;
 import cl.bsale.backend.model.Product;
 import cl.bsale.backend.repository.ProductRepository;
 
@@ -18,37 +16,73 @@ public class ProductServiceImp implements IProductService {
 	@Autowired
 	private ProductRepository productoRepository;
 	
-	private List<Product> productos = new ArrayList<Product>();
-	private static Logger logger = LoggerFactory.getLogger(ProductServiceImp.class);
+	ProductVO producto;
+	
+	private static Logger logger = LoggerFactory.getLogger(ProductRepository.class);
 	
 
 	@Override
-	public List<Product> findAll() {
+	@Transactional(readOnly = true)
+	public ProductVO findAll() {
+		producto = new ProductVO("101","error" ,new ArrayList<Product>());
+		
 		try {
-			productos = productoRepository.findAll();
+			producto.setProductos(productoRepository.findAll());
+			producto.setCodigo("0");
+			producto.setMensaje(String.format("Se obtuvieron %d registros", producto.getProductos().size()));
+			
 		} catch (Exception e) {
-			logger.error("ClubServicioImp findAll()" + e);
+			logger.error("UsuarioServicioImp : findAll : " + e);
 		}
-		return productos;
+		 return producto;
 	}
 	
 
 	@Override
-	public Product findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public ProductVO findById(Integer id) {
+		producto = new ProductVO("102","error" ,new ArrayList<Product>());
+		
+		try {
+			producto.getProductos().add(productoRepository.findById(id).get());
+			producto.setCodigo("0");
+			producto.setMensaje(String.format("Se ha encontrado el usuario %s", producto.getProductos().get(0).getName()));
+			
+		} catch (Exception e) {
+			logger.error("UsuarioServicioImp : findById : " + e);
+		}
+		 return producto;
+
 	}
 
 	@Override
-	public Product findByCategory(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProductVO findByCategory(Integer id) {
+		producto = new ProductVO("103","error" ,new ArrayList<Product>());
+		
+		try {
+			producto.setProductos(productoRepository.findByCategory(id));
+			producto.setCodigo("0");
+			producto.setMensaje(String.format("Se obtuvieron %d registros", producto.getProductos().size()));
+			
+		} catch (Exception e) {
+			logger.error("UsuarioServicioImp : findById : " + e);
+		}
+		 return producto;
 	}
 
 	@Override
-	public Product findByNombre(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProductVO findByNombre(String name) {
+		producto = new ProductVO("104","error" ,new ArrayList<Product>());
+		
+		try {
+			producto.setProductos(productoRepository.findByNombre(name));
+			producto.setCodigo("0");
+			producto.setMensaje(String.format("Se obtuvieron %d registros", producto.getProductos().size()));
+			
+		} catch (Exception e) {
+			logger.error("UsuarioServicioImp : findById : " + e);
+		}
+		 return producto;
 	}
 	
 	
