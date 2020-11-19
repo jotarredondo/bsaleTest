@@ -1,14 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
+
+<!-- Link Css -->
+<link rel="stylesheet" href="/css/style.css" />
+
+<!--Bootstrap-->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Pacifico"
+	rel="stylesheet">
+
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+	crossorigin="anonymous">
 
 
 </head>
 <body>
 
-conecction
+	<!-- Nav -->
+	<nav class="navbar navbar-expand-lg navbar-light  fixed-top">
+		<div class="container">
+			<a class="navbar-brand text-white" href="/">
+			<i class="fas fa-home fa-2x"></i></a>
 
-</body>
-</html>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation" id="burger">
+				<span class="navbar-toggler-icon "></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Header-->
+	<header class="hero text-light text-center pt-5 mt-5 col-12">
+		<div class="container">
+			<h1 class="display-1 font-weight-bold my-5" id="title">Buscador</h1>
+				<form action="/buscar" method="post" class="text-align-center px-5 mx-5" >
+					<input class="form-control text-center col-sm my-5 px-5" type="text" id="nombre" name="nombre" required /> 
+						<div class="form-group text-center">
+							<button type="submit" class="btn btn-info btn-lg" id="btn">Buscar</button>
+						</div>
+				</form>
+
+		</div>
+	</header>
+
+	<!-- Card -->
+	<div class="container">
+		<h2 class="font-weight-bold my-4 text-center" id="title">Productos</h2>
+		<div class="card-group m-auto p-2">
+			<div class="row">
+				<div class="card col-sm-3" th:each="producto : ${lista}" id="card">
+					<img th:src="${producto.urlImage}" class="card-img-top p-5">
+					<div class="card-body">
+						<h4 class="card-title" th:text="${producto.name}"></h4>
+						<h5 class="card-text" th:text="'Precio : $ ' + ${producto.price}"></h5>
+						<h5 class="card-text"
+							th:text="'Descuento : ' + ${producto.discount} + '%'"></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Footer -->
+	<footer class="text-center text-light p-3">
+		<a href="https://github.com/jotarredondo"><i
+			class="fab fa-github-square fa-2x text-white"></i></a> <a
+			href="https://www.linkedin.com/in/arredondojose/"><i
+			class="fab fa-linkedin fa-2x text-white"> </i></a>
+		<p>Jose Arredondo 2020. Todos los derechos reservados.</p>
+	</footer>
+
+	<!--Script BootStrap-->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
