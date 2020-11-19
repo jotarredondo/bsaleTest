@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cl.bsale.backend.service.IProductService;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping
 public class ProductController {
 	
 	@Autowired
 	IProductService productoServicio;
 	
-	@GetMapping
+	@GetMapping({"/","/home"})
 	public String inicio(Model modelo){
+		
 		
 		modelo.addAttribute("lista", productoServicio.findAll());
 		return "index";
