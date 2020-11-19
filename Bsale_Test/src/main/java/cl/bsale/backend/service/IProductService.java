@@ -12,6 +12,7 @@ public interface IProductService {
 	public List<Product> findByCategory(Integer id);
 	
 	public List<Product> findByNombre(String name);
+	
 		
 
 }
